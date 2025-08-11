@@ -1,0 +1,1973 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QRify Pro - Advanced QR Code Generator | Create Custom QR Codes Online</title>
+    <meta name="description" content="Generate custom QR codes with logos, gradients, and custom shapes. Free online QR code creator with multiple export options.">
+    <meta name="keywords" content="qr code generator, qr code creator, custom qr code, free qr code maker, online qr tool">
+    <meta name="author" content="QRify Pro">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://yourwebsite.com/qr-generator">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourwebsite.com/qr-generator">
+    <meta property="og:title" content="QRify Pro - Advanced QR Code Generator">
+    <meta property="og:description" content="Generate custom QR codes with logos, gradients and custom shapes. Supports multiple content types with customization options.">
+    <meta property="og:image" content="https://yourwebsite.com/images/qr-generator-preview.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://yourwebsite.com/qr-generator">
+    <meta property="twitter:title" content="QRify Pro - Advanced QR Code Generator">
+    <meta property="twitter:description" content="Generate custom QR codes with logos, gradients and custom shapes. Supports multiple content types with customization options.">
+    <meta property="twitter:image" content="https://yourwebsite.com/images/qr-generator-preview.jpg">
+    
+    <style>
+        :root {
+            --primary-blue: #00aeef;
+            --secondary-orange: #ff8c00;
+            --deep-teal: #003b46;
+            --soft-yellow: #ffd700;
+            --off-white: #f5f5f5;
+            --glass-bg: rgba(255, 255, 255, 0.15);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --neumorph-shadow-dark: 8px 8px 16px rgba(0, 0, 0, 0.3);
+            --neumorph-shadow-light: -8px -8px 16px rgba(255, 255, 255, 0.1);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --modal-bg: #1c1c2e;
+            --modal-text: #e0e0e0;
+            --modal-accent: #00bcd4;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--deep-teal), #001f27);
+            color: var(--off-white);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            background-attachment: fixed;
+            overflow-x: hidden;
+        }
+
+        .background-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.3;
+        }
+
+        .circle:nth-child(1) {
+            background: var(--primary-blue);
+            width: 300px;
+            height: 300px;
+            top: -50px;
+            left: -50px;
+        }
+
+        .circle:nth-child(2) {
+            background: var(--secondary-orange);
+            width: 400px;
+            height: 400px;
+            bottom: -100px;
+            right: -100px;
+        }
+
+        .circle:nth-child(3) {
+            background: var(--soft-yellow);
+            width: 200px;
+            height: 200px;
+            top: 30%;
+            right: 20%;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 3rem;
+            background: linear-gradient(to right, var(--primary-blue), var(--secondary-orange));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            font-weight: 300;
+        }
+
+        .main-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+
+        .input-panel {
+            flex: 1;
+            min-width: 300px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--neumorph-shadow-dark), var(--neumorph-shadow-light);
+            transition: var(--transition);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .input-panel::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .input-panel::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        .input-panel::-webkit-scrollbar-thumb {
+            background: var(--primary-blue);
+            border-radius: 10px;
+        }
+
+        .input-panel:hover {
+            transform: translateY(-5px);
+            box-shadow: 12px 12px 24px rgba(0, 0, 0, 0.4), 
+                        -12px -12px 24px rgba(255, 255, 255, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--off-white);
+            opacity: 0.9;
+        }
+
+        textarea, input[type="text"], input[type="email"], input[type="tel"], select {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: var(--off-white);
+            font-size: 1rem;
+            transition: var(--transition);
+            outline: none;
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        textarea:focus, input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus, select:focus {
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 2px rgba(0, 174, 239, 0.3);
+        }
+
+        .color-picker {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .color-option {
+            flex: 1;
+        }
+
+        .color-display {
+            width: 100%;
+            height: 40px;
+            border-radius: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .color-display:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 10px rgba(0, 174, 239, 0.3);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-blue), #007bff);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 174, 239, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 174, 239, 0.6);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--secondary-orange), #ff4500);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 140, 0, 0.4);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 140, 0, 0.6);
+        }
+
+        /* Button click animation */
+        @keyframes btnClick {
+            0% { transform: scale(1); }
+            50% { transform: scale(0.95); }
+            100% { transform: scale(1); }
+        }
+
+        .btn-click {
+            animation: btnClick 0.3s ease;
+        }
+
+        .output-panel {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--neumorph-shadow-dark), var(--neumorph-shadow-light);
+            transition: var(--transition);
+        }
+
+        .output-panel:hover {
+            transform: translateY(-5px);
+            box-shadow: 12px 12px 24px rgba(0, 0, 0, 0.4), 
+                        -12px -12px 24px rgba(255, 255, 255, 0.1);
+        }
+
+        .qr-container {
+            width: 100%;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #qr-canvas {
+            max-width: 100%;
+            padding: 1rem;
+            background: white;
+            border-radius: 12px;
+            position: relative;
+        }
+
+        .qr-placeholder {
+            text-align: center;
+            padding: 2rem;
+            opacity: 0.7;
+        }
+
+        .qr-placeholder i {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            color: rgba(255, 255, 255, 0.2);
+        }
+
+        .download-options {
+            display: flex;
+            gap: 1rem;
+            width: 100%;
+        }
+
+        .download-btn {
+            flex: 1;
+        }
+
+        .content-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        .content-type {
+            padding: 0.5rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.3rem;
+        }
+
+        .content-type:hover {
+            background: rgba(0, 174, 239, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .content-type i {
+            font-size: 1rem;
+        }
+
+        .content-type.active {
+            background: rgba(0, 174, 239, 0.4);
+            border: 1px solid var(--primary-blue);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--neumorph-shadow-dark), var(--neumorph-shadow-light);
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 12px 12px 24px rgba(0, 0, 0, 0.4), 
+                        -12px -12px 24px rgba(255, 255, 255, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-orange));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--off-white);
+        }
+
+        .feature-desc {
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        footer {
+            margin-top: 3rem;
+            text-align: center;
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* Modal styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            background: var(--modal-bg);
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 90%;
+            width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .modal-overlay.active .modal {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            color: var(--modal-text);
+            font-weight: 600;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: var(--modal-text);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .modal-close:hover {
+            color: var(--modal-accent);
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            margin-bottom: 2rem;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+        }
+
+        /* Color picker modal */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .color-option-btn {
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 12px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .color-option-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(0, 188, 212, 0.5);
+        }
+
+        .color-option-btn.selected {
+            border-color: var(--off-white);
+            box-shadow: 0 0 0 3px var(--modal-accent);
+        }
+
+        .color-preview {
+            width: 100%;
+            height: 60px;
+            border-radius: 12px;
+            margin: 1rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: white;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .hex-input {
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: var(--modal-text);
+            font-size: 1rem;
+            text-align: center;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .hex-input:focus {
+            border-color: var(--modal-accent);
+            box-shadow: 0 0 0 2px rgba(0, 188, 212, 0.3);
+        }
+
+        /* Text customization modal */
+        .text-customization-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .text-customization-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Font family and weight customization */
+        .font-customization {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .font-option {
+            flex: 1;
+        }
+
+        .font-display {
+            width: 100%;
+            height: 40px;
+            border-radius: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.2);
+            padding: 0 1rem;
+        }
+
+        .font-display:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 10px rgba(0, 174, 239, 0.3);
+        }
+
+        /* Color slider controls */
+        .color-controls {
+            margin-top: 1.5rem;
+        }
+
+        .color-slider {
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+
+        .color-slider label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .color-slider input[type="range"] {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            outline: none;
+        }
+
+        .color-slider input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .hue-slider {
+            background: linear-gradient(to right, #ff0000, #ffff00, #00ff00, #00ffff, #0000ff, #ff00ff, #ff0000);
+        }
+
+        .hue-slider::-webkit-slider-thumb {
+            background: #ffffff;
+        }
+
+        .saturation-slider {
+            background: linear-gradient(to right, #808080, currentColor);
+        }
+
+        .saturation-slider::-webkit-slider-thumb {
+            background: currentColor;
+        }
+
+        .lightness-slider {
+            background: linear-gradient(to right, #000000, currentColor, #ffffff);
+        }
+
+        .lightness-slider::-webkit-slider-thumb {
+            background: currentColor;
+        }
+
+        /* Ad container */
+        .ad-container {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            padding: 1rem;
+            margin: 2rem 0;
+            text-align: center;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px dashed rgba(255, 255, 255, 0.2);
+        }
+
+        .ad-label {
+            font-size: 0.8rem;
+            opacity: 0.6;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Slider styles */
+        .slider-container {
+            margin: 1.5rem 0;
+        }
+
+        input[type="range"] {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            outline: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            background: var(--primary-blue);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0, 174, 239, 0.5);
+        }
+
+        /* Animation classes */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .pulsing {
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid var(--glass-border);
+            margin-bottom: 1.5rem;
+        }
+        
+        .tab-link {
+            padding: 0.8rem 1.2rem;
+            cursor: pointer;
+            border: none;
+            background: none;
+            color: var(--off-white);
+            opacity: 0.7;
+            transition: var(--transition);
+            position: relative;
+            font-size: 0.9rem;
+        }
+        
+        .tab-link::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--primary-blue);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .tab-link.active {
+            opacity: 1;
+        }
+        
+        .tab-link.active::after {
+            transform: scaleX(1);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Content forms */
+        .content-form {
+            display: none;
+            border-top: 1px solid var(--glass-border);
+            padding-top: 1.5rem;
+        }
+        
+        .content-form.active {
+            display: block;
+        }
+
+        /* Gradient color stops */
+        .color-stops-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .color-stop {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .color-stop input[type="color"] {
+            width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .color-stop input[type="range"] {
+            flex: 1;
+        }
+
+        .color-stop span {
+            min-width: 40px;
+            text-align: center;
+        }
+
+        .color-stop button {
+            background: #ff4d4d;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: auto;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .download-options {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+            
+            .content-types {
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            }
+            
+            .color-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .modal {
+                width: 95%;
+                padding: 1.5rem;
+            }
+            
+            .font-customization {
+                flex-direction: column;
+            }
+            
+            .tabs {
+                flex-wrap: wrap;
+            }
+            
+            .tab-link {
+                padding: 0.5rem 0.8rem;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script type="text/javascript" src="https://unpkg.com/qr-code-styling@1.6.0-rc.1/lib/qr-code-styling.js"></script>
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_PUBLISHER_ID"></script>
+</head>
+<body>
+    <div class="background-elements">
+        <div class="circle floating" style="animation-delay: 0s;"></div>
+        <div class="circle floating" style="animation-delay: 1s;"></div>
+        <div class="circle floating" style="animation-delay: 2s;"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>QRify Pro</h1>
+            <p class="subtitle">Advanced QR code generator for modern applications</p>
+        </header>
+
+        <!-- Ad Container Top -->
+        <div class="ad-container">
+            <div>
+                <div class="ad-label">Advertisement</div>
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-YOUR_PUBLISHER_ID"
+                     data-ad-slot="YOUR_AD_SLOT_TOP"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="input-panel">
+                <div class="tabs">
+                    <button class="tab-link active" data-tab="content-tab"><i class="fas fa-edit"></i> Content</button>
+                    <button class="tab-link" data-tab="colors-tab"><i class="fas fa-palette"></i> Colors</button>
+                    <button class="tab-link" data-tab="shapes-tab"><i class="fas fa-shapes"></i> Shapes</button>
+                    <button class="tab-link" data-tab="logo-tab"><i class="fas fa-image"></i> Logo</button>
+                </div>
+                
+                <div id="content-tab" class="tab-content active">
+                    <div class="content-types">
+                        <div class="content-type active" data-form="url-form">
+                            <i class="fas fa-globe"></i> Website
+                        </div>
+                        <div class="content-type" data-form="text-form">
+                            <i class="fas fa-font"></i> Text
+                        </div>
+                        <div class="content-type" data-form="email-form">
+                            <i class="fas fa-envelope"></i> Email
+                        </div>
+                        <div class="content-type" data-form="phone-form">
+                            <i class="fas fa-phone"></i> Phone
+                        </div>
+                        <div class="content-type" data-form="sms-form">
+                            <i class="fas fa-sms"></i> SMS
+                        </div>
+                        <div class="content-type" data-form="wifi-form">
+                            <i class="fas fa-wifi"></i> Wi-Fi
+                        </div>
+                        <div class="content-type" data-form="vcard-form">
+                            <i class="fas fa-address-card"></i> vCard
+                        </div>
+                    </div>
+                    
+                    <div id="url-form" class="content-form active">
+                        <div class="form-group">
+                            <label for="url-input">Website URL</label>
+                            <input type="text" id="url-input" placeholder="https://example.com" value="https://firebasestudio.com">
+                        </div>
+                    </div>
+                    
+                    <div id="text-form" class="content-form">
+                        <div class="form-group">
+                            <label for="text-input">Plain Text</label>
+                            <textarea id="text-input" placeholder="Enter your text"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div id="email-form" class="content-form">
+                        <div class="form-group">
+                            <label for="email-address">Email Address</label>
+                            <input type="email" id="email-address" placeholder="name@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="email-subject">Subject</label>
+                            <input type="text" id="email-subject" placeholder="Email Subject">
+                        </div>
+                    </div>
+                    
+                    <div id="phone-form" class="content-form">
+                        <div class="form-group">
+                            <label for="phone-number">Phone Number</label>
+                            <input type="tel" id="phone-number" placeholder="+1234567890">
+                        </div>
+                    </div>
+                    
+                    <div id="sms-form" class="content-form">
+                        <div class="form-group">
+                            <label for="sms-number">Phone Number</label>
+                            <input type="tel" id="sms-number" placeholder="+1234567890">
+                        </div>
+                        <div class="form-group">
+                            <label for="sms-message">Message</label>
+                            <textarea id="sms-message" placeholder="Your message here"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div id="wifi-form" class="content-form">
+                        <div class="form-group">
+                            <label for="wifi-ssid">Network Name (SSID)</label>
+                            <input type="text" id="wifi-ssid" placeholder="My Wi-Fi Network">
+                        </div>
+                        <div class="form-group">
+                            <label for="wifi-password">Password</label>
+                            <input type="text" id="wifi-password" placeholder="Network Password">
+                        </div>
+                        <div class="form-group">
+                            <label for="wifi-encryption">Encryption</label>
+                            <select id="wifi-encryption">
+                                <option value="WPA">WPA/WPA2</option>
+                                <option value="WEP">WEP</option>
+                                <option value="nopass">No Password</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div id="vcard-form" class="content-form">
+                        <div class="form-group">
+                            <label for="vcard-name">Full Name</label>
+                            <input type="text" id="vcard-name" placeholder="John Doe">
+                        </div>
+                        <div class="form-group">
+                            <label for="vcard-phone">Phone</label>
+                            <input type="tel" id="vcard-phone" placeholder="+1234567890">
+                        </div>
+                        <div class="form-group">
+                            <label for="vcard-email">Email</label>
+                            <input type="email" id="vcard-email" placeholder="john.doe@example.com">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="colors-tab" class="tab-content">
+                    <div class="form-group">
+                        <label>QR Code Color</label>
+                        <div class="color-display" id="qr-color-display" style="background: linear-gradient(135deg, var(--primary-blue), var(--secondary-orange));"></div>
+                        <input type="hidden" id="qr-color" value='{"type":"linear","rotation":0,"colorStops":[{"offset":0,"color":"#00aeef"},{"offset":1,"color":"#ff8c00"}]}'>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Background Color</label>
+                        <div class="color-display" id="bg-color-display" style="background: linear-gradient(135deg, #ffffff, #f0f0f0);"></div>
+                        <input type="hidden" id="bg-color" value='{"type":"linear","rotation":0,"colorStops":[{"offset":0,"color":"#ffffff"},{"offset":1,"color":"#f0f0f0"}]}'>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="transparent-bg">Transparent Background</label>
+                        <input type="checkbox" id="transparent-bg">
+                    </div>
+                </div>
+
+                <div id="shapes-tab" class="tab-content">
+                    <div class="form-group">
+                        <label for="dots-type">Dots Style</label>
+                        <select id="dots-type">
+                            <option value="square">Square</option>
+                            <option value="dots">Dots</option>
+                            <option value="rounded" selected>Rounded</option>
+                            <option value="extra-rounded">Extra Rounded</option>
+                            <option value="classy">Classy</option>
+                            <option value="classy-rounded">Classy Rounded</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="corners-square-type">Corner Eye Shape</label>
+                        <select id="corners-square-type">
+                            <option value="square">Square</option>
+                            <option value="dot">Dot</option>
+                            <option value="extra-rounded" selected>Extra Rounded</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="corners-dot-type">Corner Dot Shape</label>
+                        <select id="corners-dot-type">
+                            <option value="square">Square</option>
+                            <option value="dot" selected>Dot</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="logo-tab" class="tab-content">
+                    <div class="form-group">
+                        <label for="logo-upload">Upload Logo</label>
+                        <input type="file" id="logo-upload" accept="image/png, image/jpeg, image/svg+xml" style="display: none;">
+                        <button onclick="document.getElementById('logo-upload').click()" class="btn btn-primary">
+                            <i class="fas fa-upload"></i> Choose File
+                        </button>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="logo-size">Logo Size: <span id="logo-size-value">40</span>%</label>
+                        <div class="slider-container">
+                            <input type="range" id="logo-size" min="0" max="1" step="0.05" value="0.4">
+                        </div>
+                    </div>
+                </div>
+                
+                <button id="generate-btn" class="btn btn-primary">
+                    <i class="fas fa-qrcode"></i> Generate QR Code
+                </button>
+            </div>
+
+            <div class="output-panel">
+                <div class="qr-container">
+                    <div id="qr-canvas"></div>
+                    <div class="qr-placeholder">
+                        <i class="fas fa-qrcode"></i>
+                        <p>Your QR code will appear here</p>
+                    </div>
+                </div>
+
+                <div class="download-options">
+                    <button id="download-png" class="btn btn-secondary download-btn" disabled>
+                        <i class="fas fa-download"></i> PNG
+                    </button>
+                    <button id="download-svg" class="btn btn-secondary download-btn" disabled>
+                        <i class="fas fa-download"></i> SVG
+                    </button>
+                    <button id="download-pdf" class="btn btn-secondary download-btn" disabled>
+                        <i class="fas fa-download"></i> PDF
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ad Container Middle -->
+        <div class="ad-container">
+            <div>
+                <div class="ad-label">Advertisement</div>
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-YOUR_PUBLISHER_ID"
+                     data-ad-slot="YOUR_AD_SLOT_MIDDLE"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-qrcode"></i>
+                </div>
+                <h3 class="feature-title">Multiple Content Types</h3>
+                <p class="feature-desc">Generate QR codes for websites, text, emails, phone numbers, SMS, Wi-Fi credentials, and vCards with ease.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-paint-brush"></i>
+                </div>
+                <h3 class="feature-title">Customizable Design</h3>
+                <p class="feature-desc">Adjust colors, shapes, and styles to match your branding with gradient colors and custom dot shapes.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-file-export"></i>
+                </div>
+                <h3 class="feature-title">Multiple Export Formats</h3>
+                <p class="feature-desc">Download your QR codes in PNG, SVG or PDF formats for printing or digital use.</p>
+            </div>
+        </div>
+
+        <!-- Ad Container Bottom -->
+        <div class="ad-container">
+            <div>
+                <div class="ad-label">Advertisement</div>
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-YOUR_PUBLISHER_ID"
+                     data-ad-slot="YOUR_AD_SLOT_BOTTOM"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; <span id="current-year"></span> QRify Pro. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <!-- Color Picker Modal -->
+    <div class="modal-overlay" id="color-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">Select Color</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="color-grid">
+                    <div class="color-option-btn" style="background: #000000;" data-color="#000000"></div>
+                    <div class="color-option-btn" style="background: #ffffff;" data-color="#ffffff"></div>
+                    <div class="color-option-btn" style="background: #003B46;" data-color="#003B46"></div>
+                    <div class="color-option-btn" style="background: #00AEEF;" data-color="#00AEEF"></div>
+                    <div class="color-option-btn" style="background: #007bff;" data-color="#007bff"></div>
+                    <div class="color-option-btn" style="background: #FF8C00;" data-color="#FF8C00"></div>
+                    <div class="color-option-btn" style="background: #FFD700;" data-color="#FFD700"></div>
+                    <div class="color-option-btn" style="background: #ff4500;" data-color="#ff4500"></div>
+                    <div class="color-option-btn" style="background: #00bcd4;" data-color="#00bcd4"></div>
+                    <div class="color-option-btn" style="background: #00ffab;" data-color="#00ffab"></div>
+                    <div class="color-option-btn" style="background: #8a2be2;" data-color="#8a2be2"></div>
+                    <div class="color-option-btn" style="background: #ff1493;" data-color="#ff1493"></div>
+                    <div class="color-option-btn" style="background: #32cd32;" data-color="#32cd32"></div>
+                    <div class="color-option-btn" style="background: #ff6347;" data-color="#ff6347"></div>
+                    <div class="color-option-btn" style="background: #9370db;" data-color="#9370db"></div>
+                </div>
+                
+                <div class="color-preview" id="modal-color-preview">Selected Color</div>
+                
+                <div class="color-controls">
+                    <div class="color-slider">
+                        <label>
+                            <span>Hue</span>
+                            <span id="hue-value">0°</span>
+                        </label>
+                        <input type="range" id="hue-slider" class="hue-slider" min="0" max="360" value="0">
+                    </div>
+                    
+                    <div class="color-slider">
+                        <label>
+                            <span>Saturation</span>
+                            <span id="saturation-value">100%</span>
+                        </label>
+                        <input type="range" id="saturation-slider" class="saturation-slider" min="0" max="100" value="100">
+                    </div>
+                    
+                    <div class="color-slider">
+                        <label>
+                            <span>Lightness</span>
+                            <span id="lightness-value">50%</span>
+                        </label>
+                        <input type="range" id="lightness-slider" class="lightness-slider" min="0" max="100" value="50">
+                    </div>
+                </div>
+                
+                <input type="text" class="hex-input" id="hex-input" placeholder="Enter HEX color (e.g. #00AEEF)" maxlength="7">
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="color-cancel">Cancel</button>
+                <button class="btn btn-primary" id="color-confirm">Set Color</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gradient Editor Modal -->
+    <div class="modal-overlay" id="gradient-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">Edit Gradient</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="gradient-type">Gradient Type</label>
+                    <select id="gradient-type">
+                        <option value="linear">Linear</option>
+                        <option value="radial">Radial</option>
+                    </select>
+                </div>
+                
+                <div class="form-group" id="gradient-angle-control">
+                    <label for="gradient-angle">Angle: <span id="gradient-angle-value">0</span>°</label>
+                    <input type="range" id="gradient-angle" min="0" max="360" value="0">
+                </div>
+                
+                <div class="form-group">
+                    <label>Color Stops</label>
+                    <div id="gradient-color-stops" class="color-stops-container"></div>
+                    <button id="add-gradient-color" class="btn btn-primary" style="width: auto; padding: 0.5rem 1rem; margin-top: 1rem;">
+                        <i class="fas fa-plus"></i> Add Color
+                    </button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="gradient-cancel">Cancel</button>
+                <button class="btn btn-primary" id="gradient-confirm">Apply</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PDF generation library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <!-- Canvas to Image library -->
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <!-- Color conversion library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tinycolor/1.6.0/tinycolor.min.js"></script>
+    
+   <script>  
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Set current year in footer
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    // Initialize QR code
+    const qrCode = new QRCodeStyling({
+        width: 300,
+        height: 300,
+        type: 'svg',
+        data: "https://firebasestudio.com",
+        dotsOptions: { 
+            type: "rounded", 
+            gradient: { 
+                type: 'linear', 
+                rotation: 0, 
+                colorStops: [
+                    { offset: 0, color: '#00aeef' }, 
+                    { offset: 1, color: '#ff8c00' }
+                ] 
+            } 
+        },
+        backgroundOptions: { 
+            gradient: {
+                type: 'linear',
+                rotation: 0,
+                colorStops: [
+                    { offset: 0, color: '#ffffff' },
+                    { offset: 1, color: '#f0f0f0' }
+                ]
+            }
+        },
+        imageOptions: { crossOrigin: "anonymous", margin: 10, imageSize: 0.4 },
+        cornersSquareOptions: { type: "extra-rounded" },
+        cornersDotOptions: { type: 'dot' }
+    });
+    
+    // DOM elements
+    const qrCanvas = document.getElementById('qr-canvas');
+    const qrPlaceholder = document.querySelector('.qr-placeholder');
+    const generateBtn = document.getElementById('generate-btn');
+    const downloadPng = document.getElementById('download-png');
+    const downloadSvg = document.getElementById('download-svg');
+    const downloadPdf = document.getElementById('download-pdf');
+    
+    // Content elements
+    const contentTypes = document.querySelectorAll('.content-type');
+    const contentForms = document.querySelectorAll('.content-form');
+    let activeForm = 'url-form';
+    
+    // Tab elements
+    const tabs = document.querySelectorAll('.tab-link');
+    const tabContents = document.querySelectorAll('.tab-content');
+    
+    // Color elements
+    const qrColorDisplay = document.getElementById('qr-color-display');
+    const bgColorDisplay = document.getElementById('bg-color-display');
+    const qrColorInput = document.getElementById('qr-color');
+    const bgColorInput = document.getElementById('bg-color');
+    const transparentBgCheckbox = document.getElementById('transparent-bg');
+    
+    // Shape elements
+    const dotsTypeSelect = document.getElementById('dots-type');
+    const cornersSquareTypeSelect = document.getElementById('corners-square-type');
+    const cornersDotTypeSelect = document.getElementById('corners-dot-type');
+    
+    // Logo elements
+    const logoUpload = document.getElementById('logo-upload');
+    const logoSizeSlider = document.getElementById('logo-size');
+    const logoSizeValue = document.getElementById('logo-size-value');
+    
+    // Modal elements
+    const colorModal = document.getElementById('color-modal');
+    const gradientModal = document.getElementById('gradient-modal');
+    const colorOptions = document.querySelectorAll('.color-option-btn');
+    const modalColorPreview = document.getElementById('modal-color-preview');
+    const hexInput = document.getElementById('hex-input');
+    const colorConfirm = document.getElementById('color-confirm');
+    const colorCancel = document.getElementById('color-cancel');
+    const gradientConfirm = document.getElementById('gradient-confirm');
+    const gradientCancel = document.getElementById('gradient-cancel');
+    const addGradientColorBtn = document.getElementById('add-gradient-color');
+    const gradientColorStopsContainer = document.getElementById('gradient-color-stops');
+    const gradientTypeSelect = document.getElementById('gradient-type');
+    const gradientAngleSlider = document.getElementById('gradient-angle');
+    const gradientAngleValue = document.getElementById('gradient-angle-value');
+    const gradientAngleControl = document.getElementById('gradient-angle-control');
+    const modalCloses = document.querySelectorAll('.modal-close');
+    
+    // Color slider elements
+    const hueSlider = document.getElementById('hue-slider');
+    const saturationSlider = document.getElementById('saturation-slider');
+    const lightnessSlider = document.getElementById('lightness-slider');
+    const hueValue = document.getElementById('hue-value');
+    const saturationValue = document.getElementById('saturation-value');
+    const lightnessValue = document.getElementById('lightness-value');
+
+    // State variables
+    let currentColorPicker = null; // 'qr' or 'bg'
+    let selectedColor = '#000000';
+    let currentHue = 0;
+    let currentSaturation = 100;
+    let currentLightness = 50;
+    let currentGradient = {
+        type: 'linear',
+        rotation: 0,
+        colorStops: [
+            { offset: 0, color: '#00aeef' },
+            { offset: 1, color: '#ff8c00' }
+        ]
+    };
+    let bgGradient = {
+        type: 'linear',
+        rotation: 0,
+        colorStops: [
+            { offset: 0, color: '#ffffff' },
+            { offset: 1, color: '#f0f0f0' }
+        ]
+    };
+
+    // Add click animations to buttons
+    const buttons = document.querySelectorAll('.btn, .content-type');
+    buttons.forEach(button => {
+        button.addEventListener('click', function() {
+            if (this.classList.contains('btn')) {
+                this.classList.add('btn-click');
+                setTimeout(() => {
+                    this.classList.remove('btn-click');
+                }, 300);
+            }
+        });
+    });
+
+    // Initialize the QR code display
+    qrCode.append(qrCanvas);
+    qrPlaceholder.style.display = 'flex';
+    qrCanvas.style.display = 'none';
+
+    // --- TABS ---
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            tabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            const target = document.getElementById(tab.dataset.tab);
+            tabContents.forEach(c => c.classList.remove('active'));
+            target.classList.add('active');
+        });
+    });
+
+    // --- CONTENT TYPES ---
+    contentTypes.forEach(type => {
+        type.addEventListener('click', () => {
+            contentTypes.forEach(t => t.classList.remove('active'));
+            type.classList.add('active');
+            activeForm = type.dataset.form;
+            contentForms.forEach(form => {
+                form.classList.toggle('active', form.id === activeForm);
+            });
+        });
+    });
+
+    function getQRData() {
+        switch(activeForm) {
+            case 'url-form': return document.getElementById('url-input').value;
+            case 'text-form': return document.getElementById('text-input').value;
+            case 'email-form': {
+                const email = document.getElementById('email-address').value;
+                const subject = document.getElementById('email-subject').value;
+                return `mailto:${email}?subject=${encodeURIComponent(subject)}`;
+            }
+            case 'phone-form': return `tel:${document.getElementById('phone-number').value}`;
+            case 'sms-form': {
+                const phone = document.getElementById('sms-number').value;
+                const msg = document.getElementById('sms-message').value;
+                return `SMSTO:${phone}:${encodeURIComponent(msg)}`;
+            }
+            case 'wifi-form': {
+                const ssid = document.getElementById('wifi-ssid').value;
+                const password = document.getElementById('wifi-password').value;
+                const encryption = document.getElementById('wifi-encryption').value;
+                return `WIFI:T:${encryption};S:${ssid};P:${password};;`;
+            }
+            case 'vcard-form': {
+                const name = document.getElementById('vcard-name').value;
+                const phone = document.getElementById('vcard-phone').value;
+                const email = document.getElementById('vcard-email').value;
+                return `BEGIN:VCARD\nVERSION:3.0\nN:${name}\nTEL:${phone}\nEMAIL:${email}\nEND:VCARD`;
+            }
+            default: return 'https://firebasestudio.com';
+        }
+    }
+    
+    // Update QR code when content changes
+    document.querySelectorAll('.content-form input, .content-form textarea, .content-form select').forEach(el => {
+        el.addEventListener('input', updateQRCode);
+    });
+
+    // --- COLOR PICKER ---
+    qrColorDisplay.addEventListener('click', function() {
+        currentColorPicker = 'qr';
+        openGradientModal(currentGradient);
+    });
+
+    bgColorDisplay.addEventListener('click', function() {
+        currentColorPicker = 'bg';
+        openGradientModal(bgGradient);
+    });
+
+    // --- GRADIENT EDITOR ---
+    function openGradientModal(gradient) {
+        if (currentColorPicker === 'qr') {
+            currentGradient = JSON.parse(JSON.stringify(gradient));
+        } else {
+            bgGradient = JSON.parse(JSON.stringify(gradient));
+        }
+        
+        gradientTypeSelect.value = gradient.type;
+        gradientAngleSlider.value = (gradient.rotation * 180) / Math.PI;
+        gradientAngleValue.textContent = Math.round((gradient.rotation * 180) / Math.PI);
+        gradientAngleControl.style.display = gradient.type === 'linear' ? 'block' : 'none';
+        
+        renderColorStops(gradient);
+        gradientModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function renderColorStops(gradient) {
+        gradientColorStopsContainer.innerHTML = '';
+        
+        gradient.colorStops.forEach((stop, index) => {
+            const stopElement = document.createElement('div');
+            stopElement.className = 'color-stop';
+            stopElement.innerHTML = `
+                <input type="color" value="${stop.color}">
+                <input type="range" min="0" max="1" step="0.01" value="${stop.offset}">
+                <span>${Math.round(stop.offset * 100)}%</span>
+                <button ${gradient.colorStops.length <= 2 ? 'disabled' : ''}><i class="fas fa-times"></i></button>
+            `;
+            gradientColorStopsContainer.appendChild(stopElement);
+
+            const removeBtn = stopElement.querySelector('button');
+            removeBtn.addEventListener('click', () => {
+                if (gradient.colorStops.length > 2) {
+                    gradient.colorStops.splice(index, 1);
+                    // Recalculate offsets
+                    gradient.colorStops.forEach((s, i) => { 
+                        s.offset = i / (gradient.colorStops.length - 1); 
+                    });
+                    renderColorStops(gradient);
+                }
+            });
+            
+            stopElement.querySelector('input[type="color"]').addEventListener('input', (e) => {
+                gradient.colorStops[index].color = e.target.value;
+            });
+            
+            stopElement.querySelector('input[type="range"]').addEventListener('input', (e) => {
+                gradient.colorStops[index].offset = parseFloat(e.target.value);
+                stopElement.querySelector('span').textContent = `${Math.round(e.target.value * 100)}%`;
+            });
+        });
+    }
+
+    addGradientColorBtn.addEventListener('click', function() {
+        const gradient = currentColorPicker === 'qr' ? currentGradient : bgGradient;
+        if (gradient.colorStops.length < 5) {
+            // Add new color with a hue shift from the last color
+            const lastColor = tinycolor(gradient.colorStops[gradient.colorStops.length - 1].color);
+            const newColor = lastColor.spin(30).toHexString();
+            
+            gradient.colorStops.push({ offset: 1, color: newColor });
+            // Recalculate offsets
+            gradient.colorStops.forEach((stop, i) => { 
+                stop.offset = i / (gradient.colorStops.length - 1); 
+            });
+            renderColorStops(gradient);
+        } else {
+            alert("Maximum of 5 color stops reached.");
+        }
+    });
+
+    gradientTypeSelect.addEventListener('change', function() {
+        const gradient = currentColorPicker === 'qr' ? currentGradient : bgGradient;
+        gradient.type = this.value;
+        gradientAngleControl.style.display = this.value === 'linear' ? 'block' : 'none';
+    });
+
+    gradientAngleSlider.addEventListener('input', function(e) {
+        const gradient = currentColorPicker === 'qr' ? currentGradient : bgGradient;
+        gradient.rotation = (parseFloat(e.target.value) * Math.PI) / 180;
+        gradientAngleValue.textContent = e.target.value;
+    });
+
+    gradientConfirm.addEventListener('click', function() {
+        // Get the current gradient being edited
+        const gradient = currentColorPicker === 'qr' ? currentGradient : bgGradient;
+        
+        // Update gradient properties from UI
+        gradient.type = gradientTypeSelect.value;
+        gradient.rotation = (parseFloat(gradientAngleSlider.value) * Math.PI) / 180;
+        
+        // Update color stops from UI inputs
+        const colorInputs = gradientColorStopsContainer.querySelectorAll('input[type="color"]');
+        const offsetInputs = gradientColorStopsContainer.querySelectorAll('input[type="range"]');
+        
+        gradient.colorStops = Array.from(colorInputs).map((colorInput, i) => ({
+            color: colorInput.value,
+            offset: parseFloat(offsetInputs[i].value)
+        }));
+        
+        // Sort by offset to ensure proper gradient rendering
+        gradient.colorStops.sort((a, b) => a.offset - b.offset);
+        
+        // Update the display and input value
+        if (currentColorPicker === 'qr') {
+            qrColorInput.value = JSON.stringify(gradient);
+            qrColorDisplay.style.background = getGradientCSS(gradient);
+        } else {
+            bgColorInput.value = JSON.stringify(gradient);
+            bgColorDisplay.style.background = getGradientCSS(gradient);
+        }
+        
+        closeModal(gradientModal);
+        updateQRCode();
+    });
+
+    // Helper function to generate CSS gradient string
+    function getGradientCSS(gradient) {
+        if (gradient.type === 'linear') {
+            return `linear-gradient(${gradient.rotation}rad, ${gradient.colorStops.map(stop => `${stop.color} ${stop.offset * 100}%`).join(', ')})`;
+        } else {
+            return `radial-gradient(${gradient.colorStops.map(stop => `${stop.color} ${stop.offset * 100}%`).join(', ')})`;
+        }
+    }
+
+    gradientCancel.addEventListener('click', function() {
+        closeModal(gradientModal);
+    });
+
+    // --- COLOR PICKER MODAL ---
+    function openColorModal(currentColor) {
+        selectedColor = currentColor;
+        
+        // Convert current color to HSL
+        const hsl = tinycolor(selectedColor).toHsl();
+        currentHue = Math.round(hsl.h);
+        currentSaturation = Math.round(hsl.s * 100);
+        currentLightness = Math.round(hsl.l * 100);
+        
+        // Update sliders
+        hueSlider.value = currentHue;
+        saturationSlider.value = currentSaturation;
+        lightnessSlider.value = currentLightness;
+        
+        // Update display values
+        hueValue.textContent = `${currentHue}°`;
+        saturationValue.textContent = `${currentSaturation}%`;
+        lightnessValue.textContent = `${currentLightness}%`;
+        
+        // Update color preview
+        updateColorPreview();
+        
+        // Update selected state in color grid
+        colorOptions.forEach(option => {
+            option.classList.remove('selected');
+            if (option.getAttribute('data-color').toLowerCase() === selectedColor.toLowerCase()) {
+                option.classList.add('selected');
+            }
+        });
+        
+        hexInput.value = selectedColor;
+        colorModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    // Update color preview based on HSL values
+    function updateColorPreview() {
+        selectedColor = tinycolor({
+            h: currentHue,
+            s: currentSaturation / 100,
+            l: currentLightness / 100
+        }).toHexString();
+        
+        modalColorPreview.style.backgroundColor = selectedColor;
+        modalColorPreview.textContent = selectedColor;
+        hexInput.value = selectedColor;
+        
+        // Update saturation and lightness slider colors
+        saturationSlider.style.setProperty('--current-color', `hsl(${currentHue}, 100%, 50%)`);
+        lightnessSlider.style.setProperty('--current-color', `hsl(${currentHue}, ${currentSaturation}%, 50%)`);
+    }
+
+    // Color slider event listeners
+    hueSlider.addEventListener('input', function() {
+        currentHue = parseInt(this.value);
+        hueValue.textContent = `${currentHue}°`;
+        updateColorPreview();
+    });
+
+    saturationSlider.addEventListener('input', function() {
+        currentSaturation = parseInt(this.value);
+        saturationValue.textContent = `${currentSaturation}%`;
+        updateColorPreview();
+    });
+
+    lightnessSlider.addEventListener('input', function() {
+        currentLightness = parseInt(this.value);
+        lightnessValue.textContent = `${currentLightness}%`;
+        updateColorPreview();
+    });
+
+    // Color option selection
+    colorOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            colorOptions.forEach(opt => opt.classList.remove('selected'));
+            this.classList.add('selected');
+            selectedColor = this.getAttribute('data-color');
+            
+            // Convert selected color to HSL
+            const hsl = tinycolor(selectedColor).toHsl();
+            currentHue = Math.round(hsl.h);
+            currentSaturation = Math.round(hsl.s * 100);
+            currentLightness = Math.round(hsl.l * 100);
+            
+            // Update sliders
+            hueSlider.value = currentHue;
+            saturationSlider.value = currentSaturation;
+            lightnessSlider.value = currentLightness;
+            
+            // Update display values
+            hueValue.textContent = `${currentHue}°`;
+            saturationValue.textContent = `${currentSaturation}%`;
+            lightnessValue.textContent = `${currentLightness}%`;
+            
+            updateColorPreview();
+        });
+    });
+
+    // HEX input handling
+    hexInput.addEventListener('input', function() {
+        const value = this.value;
+        if (value.match(/^#[0-9A-Fa-f]{6}$/)) {
+            selectedColor = value;
+            
+            // Convert to HSL
+            const hsl = tinycolor(selectedColor).toHsl();
+            currentHue = Math.round(hsl.h);
+            currentSaturation = Math.round(hsl.s * 100);
+            currentLightness = Math.round(hsl.l * 100);
+            
+            // Update sliders
+            hueSlider.value = currentHue;
+            saturationSlider.value = currentSaturation;
+            lightnessSlider.value = currentLightness;
+            
+            // Update display values
+            hueValue.textContent = `${currentHue}°`;
+            saturationValue.textContent = `${currentSaturation}%`;
+            lightnessValue.textContent = `${currentLightness}%`;
+            
+            updateColorPreview();
+            
+            // Update selected state in color grid
+            colorOptions.forEach(option => {
+                option.classList.remove('selected');
+                if (option.getAttribute('data-color').toLowerCase() === value.toLowerCase()) {
+                    option.classList.add('selected');
+                }
+            });
+        }
+    });
+
+    // Color confirm button
+    colorConfirm.addEventListener('click', function() {
+        if (currentColorPicker === 'bg') {
+            bgColorInput.value = selectedColor;
+            bgColorDisplay.style.backgroundColor = selectedColor;
+        }
+        closeModal(colorModal);
+        updateQRCode();
+    });
+
+    // Color cancel button
+    colorCancel.addEventListener('click', function() {
+        closeModal(colorModal);
+    });
+
+    // --- SHAPE OPTIONS ---
+    [dotsTypeSelect, cornersSquareTypeSelect, cornersDotTypeSelect].forEach(el => {
+        el.addEventListener('change', updateQRCode);
+    });
+
+    // --- LOGO OPTIONS ---
+    logoUpload.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                qrCode._options.image = event.target.result;
+                updateQRCode();
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    logoSizeSlider.addEventListener('input', function(e) {
+        logoSizeValue.textContent = Math.round(e.target.value * 100);
+        qrCode._options.imageOptions.imageSize = parseFloat(e.target.value);
+        updateQRCode();
+    });
+
+    // --- TRANSPARENT BACKGROUND ---
+    transparentBgCheckbox.addEventListener('change', updateQRCode);
+
+    // --- GENERATE QR CODE ---
+    function updateQRCode() {
+        const data = getQRData();
+        if (!data) {
+            showNotification('Please enter some content to generate a QR code', 'error');
+            return;
+        }
+
+        // Show loading state
+        qrPlaceholder.innerHTML = '<i class="fas fa-spinner fa-spin"></i><p>Generating QR Code...</p>';
+        qrPlaceholder.style.display = 'flex';
+        qrCanvas.style.display = 'none';
+
+        // Generate new QR code with slight delay for better UX
+        setTimeout(() => {
+            try {
+                const backgroundOptions = transparentBgCheckbox.checked 
+                    ? { color: '#00000000' }
+                    : { gradient: JSON.parse(bgColorInput.value) };
+
+                const dotsOptions = {
+                    type: dotsTypeSelect.value,
+                    gradient: JSON.parse(qrColorInput.value)
+                };
+
+                const options = {
+                    data: data,
+                    dotsOptions: dotsOptions,
+                    backgroundOptions: backgroundOptions,
+                    cornersSquareOptions: { type: cornersSquareTypeSelect.value },
+                    cornersDotOptions: { type: cornersDotTypeSelect.value },
+                    image: qrCode._options.image,
+                    imageOptions: { 
+                        ...qrCode._options.imageOptions, 
+                        imageSize: parseFloat(logoSizeSlider.value) 
+                    }
+                };
+
+                qrCode.update(options);
+                
+                // Hide placeholder and show QR code
+                qrPlaceholder.style.display = 'none';
+                qrCanvas.style.display = 'block';
+
+                // Enable download buttons
+                downloadPng.disabled = false;
+                downloadSvg.disabled = false;
+                downloadPdf.disabled = false;
+                downloadPng.classList.add('pulsing');
+                downloadSvg.classList.add('pulsing');
+                downloadPdf.classList.add('pulsing');
+
+                // Show success notification
+                showNotification('QR code generated successfully!', 'success');
+            } catch (err) {
+                console.error(err);
+                showNotification('Error generating QR code. Please check your input.', 'error');
+                qrPlaceholder.innerHTML = '<i class="fas fa-exclamation-triangle"></i><p>Error generating QR code</p>';
+            }
+        }, 500);
+    }
+
+    // --- DOWNLOAD BUTTONS ---
+    downloadPng.addEventListener('click', function() {
+        qrCode.download({ name: 'qrify-pro', extension: 'png' });
+    });
+
+    downloadSvg.addEventListener('click', function() {
+        qrCode.download({ name: 'qrify-pro', extension: 'svg' });
+    });
+
+    downloadPdf.addEventListener('click', function() {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF({
+            orientation: 'landscape',
+            unit: 'mm'
+        });
+        
+        // Convert canvas to image
+        html2canvas(document.querySelector('#qr-canvas canvas')).then(canvas => {
+            const imgData = canvas.toDataURL('image/png');
+            const imgWidth = 100; // mm
+            const imgHeight = (canvas.height * imgWidth) / canvas.width;
+            
+            doc.addImage(imgData, 'PNG', 10, 10, imgWidth, imgHeight);
+            doc.save('qrify-pro.pdf');
+            
+            showNotification('PDF download started', 'success');
+        });
+    });
+
+    // --- NOTIFICATIONS ---
+    function showNotification(message, type) {
+        // Create notification element
+        const notification = document.createElement('div');
+        notification.className = `notification ${type}`;
+        notification.textContent = message;
+        
+        // Style the notification
+        notification.style.position = 'fixed';
+        notification.style.bottom = '20px';
+        notification.style.right = '20px';
+        notification.style.padding = '15px 25px';
+        notification.style.borderRadius = '12px';
+        notification.style.color = 'white';
+        notification.style.fontWeight = '500';
+        notification.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.3)';
+        notification.style.zIndex = '1000';
+        notification.style.transform = 'translateY(100px)';
+        notification.style.opacity = '0';
+        notification.style.transition = 'all 0.3s ease';
+        
+        // Set background based on type
+        if (type === 'error') {
+            notification.style.background = 'linear-gradient(135deg, #ff4d4d, #cc0000)';
+        } else {
+            notification.style.background = 'linear-gradient(135deg, var(--primary-blue), #007bff)';
+        }
+        
+        document.body.appendChild(notification);
+        
+        // Show notification
+        setTimeout(() => {
+            notification.style.transform = 'translateY(0)';
+            notification.style.opacity = '1';
+        }, 10);
+        
+        // Hide after 3 seconds
+        setTimeout(() => {
+            notification.style.transform = 'translateY(100px)';
+            notification.style.opacity = '0';
+            setTimeout(() => {
+                notification.remove();
+            }, 300);
+        }, 3000);
+    }
+
+    // --- MODAL CLOSE HANDLERS ---
+    modalCloses.forEach(closeBtn => {
+        closeBtn.addEventListener('click', function() {
+            const modal = this.closest('.modal-overlay');
+            closeModal(modal);
+        });
+    });
+
+    // Close modal when clicking outside
+    document.querySelectorAll('.modal-overlay').forEach(modal => {
+        modal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal(this);
+            }
+        });
+    });
+
+    function closeModal(modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+});
+
+   </script>
+</body>
+</html> 
+
+Rewrite all javascript without changing anything.
